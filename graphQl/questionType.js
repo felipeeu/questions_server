@@ -1,15 +1,18 @@
-import { GraphQLObjectType, GraphQLString , GraphQLInt } from 'graphql';
+import {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLNonNull
+} from "graphql";
 
+const stringNonNull = { type: new GraphQLNonNull(GraphQLString) };
 
 const QuestionType = new GraphQLObjectType({
-  name: 'Question',
+  name: "Question",
   fields: () => ({
-    id:{type: GraphQLString},
-    topic: {type: GraphQLString},
-    body:{type: GraphQLString},
-    type: {type: GraphQLString},
-    level: {type: GraphQLString},
-    value: {type: GraphQLInt},
+    id: stringNonNull,
+    topic: stringNonNull,
+    body: stringNonNull,
+    answer: stringNonNull, 
   })
 });
 

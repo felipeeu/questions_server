@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 const QuestionSchema = new Schema({
   topic: String,
   body:String,
-  type: String,
-  level: Number,
-  value: Number,
+  answer: String,
 });
 
 export default mongoose.model('Question', QuestionSchema);
+
+

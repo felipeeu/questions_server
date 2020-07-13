@@ -5,7 +5,7 @@ import  initDB from'./db';
 
 initDB();
 
-let port = process.env.PORT || 4000;
+let port =  4000;
 
 const app = express();
 
