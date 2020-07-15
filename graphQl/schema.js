@@ -44,20 +44,33 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
-    addQuestion: {
+    createQuestion: {
       type: QuestionType,
+      description: "Create a question",
       args: {
         topic: stringNonNull,
         body: stringNonNull,
         answer: stringNonNull
       },
       resolve(parent, args) {
-        let question = new Question({
-          topic: args.topic,
-          body: args.body,
-          answer: args.answer
+        Question.create(
+          { topic: args.topic, body: args.body, answer: args.answer },
+          function(err) {
+            if (err) return console.log(err);
+          }
+        );
+      }
+    },
+    deleteQuestion: {
+      type: QuestionType,
+      description: "Delete a question",
+      args: {
+        id: stringNonNull
+      },
+      resolve(parent, args) {
+        Question.findByIdAndRemove(args.id, function(err) {
+          if (err) return console.log(err);
         });
-        return question.save();
       }
     }
   }
