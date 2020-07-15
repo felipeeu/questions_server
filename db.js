@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const initDB = () => {
   mongoose.connect(
-    'mongodb://localhost:27017/local', //"mongodb+srv://felipeeu:fevi2406@clusterfelipe-kdk6j.mongodb.net/q&a?retryWrites=true",
+    "mongodb+srv://felipeeu:fevi2406@clusterfelipe-kdk6j.mongodb.net/q&a?retryWrites=true",
     { useNewUrlParser: true, useUnifiedTopology: true }
   );
 
