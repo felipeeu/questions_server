@@ -3,20 +3,29 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
-  GraphQLNonNull,
+  GraphQLNonNull
 } from "graphql";
-import questionGraphQLType from "./questionType";
+
 import Question from "../DBmodels/questions";
-import QuestionType from "./questionType";
 
 const stringNonNull = { type: new GraphQLNonNull(GraphQLString) };
+
+const QuestionType = new GraphQLObjectType({
+  name: "Question",
+  fields: () => ({
+    id: stringNonNull,
+    topic: stringNonNull,
+    body: stringNonNull,
+    answer: stringNonNull
+  })
+});
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
   description: "Schema root",
   fields: {
     question: {
-      type: questionGraphQLType,
+      type: QuestionType,
       args: { id: { type: GraphQLString } },
       resolve(parent, args) {
         return Question.findById(args.id);
@@ -40,13 +49,13 @@ const Mutation = new GraphQLObjectType({
       args: {
         topic: stringNonNull,
         body: stringNonNull,
-        answer: stringNonNull,
+        answer: stringNonNull
       },
       resolve(parent, args) {
         let question = new Question({
           topic: args.topic,
           body: args.body,
-          answer: args.answer,
+          answer: args.answer
         });
         return question.save();
       }
