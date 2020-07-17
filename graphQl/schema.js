@@ -72,6 +72,23 @@ const Mutation = new GraphQLObjectType({
           if (err) return console.log(err);
         });
       }
+    },
+    updateQuestion: {
+      type: QuestionType,
+      description: "Update a question",
+      args: {
+        id: stringNonNull,
+        topic: stringNonNull,
+        body: stringNonNull,
+        answer: stringNonNull
+      },
+      resolve(parent, args) {
+        Question.findOneAndUpdate(
+          { id: args.id },
+          args,
+          { new: true }
+        );
+      }
     }
   }
 });
